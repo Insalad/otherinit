@@ -422,6 +422,19 @@ getgenv().fireclickdetector = newcclosure(function(Target)
 		NewPart:Destroy()
 	end)
 end)
+    getgenv().saveinstance = function() -- https://scriptblox.com/script/Universal-Script-Universal-Syn-Saveinstance-14624
+        local Params = {
+            RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/", 
+            SSI = "saveinstance",
+        }
+        local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
+        local SaveOptions = {
+            ReadMe = true,
+            IsolatePlayers = true,
+            FilePath = string.format("%d", tick())
+        }
+        synsaveinstance(SaveOptions)
+    end
 getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
 loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
