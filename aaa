@@ -452,7 +452,6 @@ getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
 loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Incognito-UI-Remake-13393"))()
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
 getgenv().is_executor_closure = isexecclosure
