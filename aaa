@@ -439,20 +439,6 @@ getgenv().fireclickdetector = newcclosure(function(Target)
 	end)
 end)
 print("[ Salad ] -> fireclickdetector done")
-    getgenv().saveinstance = function() -- https://scriptblox.com/script/Universal-Script-Universal-Syn-Saveinstance-14624
-        local Params = {
-            RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/", 
-            SSI = "saveinstance",
-        }
-        local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
-        local SaveOptions = {
-            ReadMe = true,
-            IsolatePlayers = true,
-            FilePath = string.format("%d", tick())
-        }
-        synsaveinstance(SaveOptions)
-    end
-    print("[ Salad ] -> saveinstance done")
 getgenv().replicatesignal = newcclosure(function(signal)
     if typeof(signal) ~= "RBXScriptSignal" then
         error("Expected a signal (RBXScriptSignal) as the argument.")
