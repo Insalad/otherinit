@@ -472,6 +472,7 @@ getgenv()["FireClickDetector"] = fireclickdetector
 loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
 print("[ Salad ] -> drawing done")
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
+loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/SimpleSpy"))()
 print("[ Salad ] -> decompiler done")
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
