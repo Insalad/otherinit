@@ -439,19 +439,6 @@ getgenv().fireclickdetector = newcclosure(function(Target)
 	end)
 end)
 print("[ Salad ] -> fireclickdetector done")
-getgenv().replicatesignal = newcclosure(function(signal)
-    if typeof(signal) ~= "RBXScriptSignal" then
-        error("Expected a signal (RBXScriptSignal) as the argument.")
-    end    
-    local connections = getconnections(signal)
-    for _, connection in ipairs(connections) do
-        local callback = connection.Function
-        if callback then
-            task.spawn(callback)
-        end
-    end
-end)
-print("[ Salad ] -> replicatesignal done")
 
 getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
