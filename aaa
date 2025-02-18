@@ -8,7 +8,6 @@
        ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░                                                                   
 ]]
-print("[ Salad ] -> Loading Init script")
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 -- vars
@@ -24,7 +23,6 @@ getgenv().ogfs = {}
 local keyshit = {}
 local protecteduis = {}
 local names = {}
-print("[ Salad ] -> Initial defs done")
 -- functions
 getgenv().makewriteable = newcclosure(function(taable)
     return setreadonly(taable, false)
@@ -57,7 +55,6 @@ end)
 getgenv().getprotecteduis = newcclosure(function()
     return protecteduis
 end)
-print("[ Salad ] -> Syn Lib done")
 
 local testdebug = table.clone(debug)
 
@@ -75,8 +72,6 @@ testdebug.setupvalue = getgenv().setupvalue
 testdebug.getregistry = getgenv().getregistry
 
 debug = testdebug
-
-print("[ Salad ] -> Debug Lib TEST done")
 
 getgenv().bit = {}
 
@@ -133,7 +128,6 @@ bit.bswap = function(x)
  local d = bit.band(x, 0xff)
  return bit.lshift(bit.lshift(bit.lshift(a, 8) + b, 8) + c, 8) + d
 end
-print("[ Salad ] -> BIT Lib done")
 getgenv().setthreadidentity = newcclosure(function(identity: number): ()
     _setidentity(identity)
     task.wait()
@@ -141,7 +135,6 @@ end)
 
 getgenv().setidentity = getgenv().setthreadidentity
 getgenv().setthreadcontext = getgenv().setthreadidentity
-print("[ Salad ] -> setthreadidentity done")
 
 getgenv().getinstances = newcclosure(function()
             local objs = {}
@@ -207,8 +200,6 @@ getgenv().getscripthash = newcclosure(function(script)
     return script:GetHash()
 end)
 
-print("[ Salad ] -> Actors/Instances done")
-
 setreadonly(getgenv().debug,false)
 getgenv().debug.traceback = getrenv().debug.traceback
 getgenv().debug.profilebegin = getrenv().debug.profilebegin
@@ -216,7 +207,6 @@ getgenv().debug.profileend = getrenv().debug.profileend
 getgenv().debug.getmetatable = getgenv().getrawmetatable
 getgenv().debug.setmetatable = getgenv().setrawmetatable
 getgenv().debug.info = getrenv().debug.info
-print("[ Salad ] -> Debug Lib done")
 
 getgenv().getrunningscripts = newcclosure(function()
     local t = table.create(0)
@@ -262,8 +252,6 @@ getgenv().getsenv = newcclosure(function(script_instance)
      end
 end)
 
-print("[ Salad ] -> Scripts and modules done")
-
 getgenv().isnetworkowner = newcclosure(function(part: BasePart): boolean
     return part.ReceiveAge == 0 and not part.Anchored and part.Velocity.Magnitude > 0
 end)
@@ -274,8 +262,6 @@ getgenv().firesignal = newcclosure(function(signal, ...)
         connection.Function(...)
     end
 end)
-
-print("[ Salad ] -> Firesignal and isnetworkowner done")
 
 getgenv().setsimulationradius = newcclosure(function(newRadius)
     assert(newRadius, `arg #1 is missing`)
@@ -331,8 +317,6 @@ getgenv().fireproximityprompt = newcclosure(function(proximityprompt, amount, sk
     proximityprompt.HoldDuration = oldHoldDuration
 end)
 
-print("[ Salad ] -> Fireproximityprompt, get/setsimulationradius done")
-
 getgenv().http = {}
 getgenv().http.request = request
 setreadonly(http, true)
@@ -365,7 +349,6 @@ getgenv().crypt.hash = getgenv().hash
 
 setreadonly(getgenv().base64, true)
 setreadonly(getgenv().crypt, true)
-print("[ Salad ] -> HTTP, crypt and base64 aliases done done")
 local _oldd = clonefunction(getscriptclosure_handler)
 
 getgenv().getscriptclosure = newcclosure(function(scr) 
@@ -383,7 +366,6 @@ getgenv().getscriptclosure = newcclosure(function(scr)
 end)
 
 getgenv().getscriptfunction = getgenv().getscriptclosure
-print("[ Salad ] -> getscriptclosure done")
 local oldreq = clonefunction(getrenv().require)
 getgenv().require = newcclosure(function(v)
     local oldlevel = getthreadcontext()
@@ -403,7 +385,6 @@ getgenv().require = newcclosure(function(v)
         return res
     end
 end)
-print("[ Salad ] -> require done")
 getgenv().fireclickdetector = newcclosure(function(Target)
 	assert(typeof(Target) == "Instance", "invalid argument #1 to 'fireclickdetector' (Instance expected, got " .. type(Target) .. ") ", 2)
 	local ClickDetector = Target:FindFirstChild("ClickDetector") or Target
@@ -438,14 +419,12 @@ getgenv().fireclickdetector = newcclosure(function(Target)
 		NewPart:Destroy()
 	end)
 end)
-print("[ Salad ] -> fireclickdetector done")
+
 
 getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
 loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
-print("[ Salad ] -> drawing done")
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
-print("[ Salad ] -> decompiler done")
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
 getgenv().is_executor_closure = isexecclosure
@@ -497,4 +476,3 @@ getgenv().is_our_closure = isexecutorclosure
 getgenv().issynapsefunction = isexecutorclosure
 getgenv().setrbxclipboard = setclipboard
 getgenv().IS_SALAD_LOADED = true
-print("[ Salad ] -> aliases done")
