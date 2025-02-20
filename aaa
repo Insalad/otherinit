@@ -473,43 +473,6 @@ getgenv().setrenderproperty = newcclosure(function(x, y, z)
     assert(isrenderobj(x), 'invalid drawing object')
     x[y] = z;
 end)
-local ogidentityset = setidentity
-getgenv().setidentity = newcclosure(function(level, ...)
-    if level == 8 then
-        local callstack = debug.traceback()
-        if callstack:match("__namecall") or callstack:match("SaveScriptProfilingData") or callstack:match("GetObjects") then
-            warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
-            return false
-        end
-    end
-    local success, result = pcall(function()
-        local callstack = debug.traceback()
-        if callstack:match("BatchPayload") or callstack:match("OpenUrl") or callstack:match("LinkingService") then
-            return false
-        end
-        return true
-    end)
-    if not success or result == false then
-        warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
-        return false
-    end
-    return pcall(ogidentityset, level, ...)
-end)
-local mt = getrawmetatable(game)
-if mt then
-    local old_namecall = mt.__namecall
-    setreadonly(mt, false)
-    mt.__namecall = newcclosure(function(self, ...)
-        local method = getnamecallmethod()
-        if method == "SaveScriptProfilingData" or 
-           method == "OpenUrl" then
-            warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
-            return nil
-        end
-        return old_namecall(self, ...)
-    end)
-    setreadonly(mt, true)
-end
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
@@ -561,4 +524,43 @@ getgenv().debug.isvalidlevel = getgenv().debug.validlevel
 getgenv().is_our_closure = isexecutorclosure 
 getgenv().issynapsefunction = isexecutorclosure
 getgenv().setrbxclipboard = setclipboard
+task.wait(1)
+local ogidentityset = setidentity
+getgenv().setidentity = newcclosure(function(level, ...)
+    if level == 8 then
+        local callstack = debug.traceback()
+        if callstack:match("__namecall") or callstack:match("SaveScriptProfilingData") or callstack:match("GetObjects") then
+            warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
+            return false
+        end
+    end
+    local success, result = pcall(function()
+        local callstack = debug.traceback()
+        if callstack:match("BatchPayload") or callstack:match("OpenUrl") or callstack:match("LinkingService") then
+            return false
+        end
+        return true
+    end)
+    if not success or result == false then
+        warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
+        return false
+    end
+    return pcall(ogidentityset, level, ...)
+end)
+local mt = getrawmetatable(game)
+if mt then
+    local old_namecall = mt.__namecall
+    setreadonly(mt, false)
+    mt.__namecall = newcclosure(function(self, ...)
+        local method = getnamecallmethod()
+        if method == "SaveScriptProfilingData" or 
+           method == "OpenUrl" then
+            warn("hi vro someone tried to do funni funnies with savescriptprofilingdata but salad is more skibidi")
+            return nil
+        end
+        return old_namecall(self, ...)
+    end)
+    setreadonly(mt, true)
+end
+print("[ Salad ] -> Loaded Init")
 getgenv().IS_SALAD_LOADED = true
