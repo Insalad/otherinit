@@ -423,7 +423,7 @@ end)
 
 getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
-loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
+--loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
