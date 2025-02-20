@@ -422,8 +422,59 @@ end)
 
 
 getgenv()["fire_click_detector"] = fireclickdetector
-getgenv()["FireClickDetector"] = fireclickdetector
---loadstring(game:HttpGet('https://pastebin.com/raw/z3xBKccm'))()
+getgenv()["FireClickDetector"] = fireclickdetectorif not game:IsLoaded() then
+    game.Loaded:Wait();
+end
+
+local Player = game:GetService('Players').LocalPlayer;
+local textService = cloneref(game:GetService("TextService"));
+
+local drawing = {
+    Fonts = {
+        UI = 0,
+        System = 1,
+        Plex = 2,
+        Monospace = 3
+    }
+};
+
+local renv = getrenv();
+
+local pi = renv.math.pi;
+local huge = renv.math.huge;
+
+local _assert = (renv.assert);
+local _color3new = (renv.Color3.new);
+local _instancenew = (renv.Instance.new);
+local _mathatan2 = (renv.math.atan2);
+local _mathclamp = (renv.math.clamp);
+local _mathmax = (renv.math.max);
+local _setmetatable = (renv.setmetatable);
+local _stringformat = (renv.string.format);
+local _typeof = (renv.typeof);
+local _taskspawn = (renv.task.spawn);
+local _udimnew = (renv.UDim.new);
+local _udim2fromoffset = (renv.UDim2.fromOffset);
+local _udim2new = (renv.UDim2.new);
+local _vector2new = (renv.Vector2.new);
+
+local _destroy = (game.Destroy);
+local _gettextboundsasync = (textService.GetTextBoundsAsync);
+
+local _httpget = (game.HttpGet);
+local _writecustomasset = function(path, data)
+	writefile(path,data)
+	return getcustomasset(path)
+end
+getgenv().getrenderproperty = newcclosure(function(x, y)
+	assert(isrenderobj(x), 'invalid drawing object')
+    return x[y];
+end)
+
+getgenv().setrenderproperty = newcclosure(function(x, y, z)
+    assert(isrenderobj(x), 'invalid drawing object')
+    x[y] = z;
+end)
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
