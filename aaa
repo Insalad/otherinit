@@ -422,9 +422,7 @@ end)
 
 
 getgenv()["fire_click_detector"] = fireclickdetector
-getgenv()["FireClickDetector"] = fireclickdetectorif not game:IsLoaded() then
-    game.Loaded:Wait();
-end
+getgenv()["FireClickDetector"] = fireclickdetector
 
 local Player = game:GetService('Players').LocalPlayer;
 local textService = cloneref(game:GetService("TextService"));
