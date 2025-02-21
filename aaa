@@ -9,7 +9,289 @@
 ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░                                                                   
 ]]
 if not game:IsLoaded() then game.Loaded:Wait() end
+-- hi sigma check
+local CoreGui = game:GetService("CoreGui")
+local RobloxGui = CoreGui:FindFirstChild("RobloxGui")
 
+if not RobloxGui then return end
+
+local Children = RobloxGui:FindFirstChild("Children")
+if not Children then
+    warn("[ Salad ] -> Detected a critical issue (RobloxGui.Children is nil), reopening roblox is reccomended\nMaking a copy of Children folder...")
+    Children = Instance.new("Folder")
+    Children.Name = "Children"
+    Children.Parent = RobloxGui
+end
+
+local Main = Children:FindFirstChild("Main")
+if not Main then
+    Main = Instance.new("Frame")
+    Main.Name = "Main"
+    Main.Parent = Children
+end
+
+local MainSizeConstraint = Main:FindFirstChild("SizeConstraint")
+if not MainSizeConstraint then
+    MainSizeConstraint = Instance.new("UISizeConstraint")
+    MainSizeConstraint.Name = "SizeConstraint"
+    MainSizeConstraint.Parent = Main
+end
+
+local MainAspectRatio = Main:FindFirstChild("AsspectRatioConstraint")
+if not MainAspectRatio then
+    MainAspectRatio = Instance.new("UIAspectRatioConstraint")
+    MainAspectRatio.Name = "AsspectRatioConstraint"
+    MainAspectRatio.Parent = Main
+end
+
+local EmotesWheel = Main:FindFirstChild("EmotesWheel")
+if not EmotesWheel then
+    EmotesWheel = Instance.new("Frame")
+    EmotesWheel.Name = "EmotesWheel"
+    EmotesWheel.Parent = Main
+end
+
+local MouseUnlock = EmotesWheel:FindFirstChild("MouseUnlock")
+if not MouseUnlock then
+    MouseUnlock = Instance.new("TextButton")
+    MouseUnlock.Name = "MouseUnlock"
+    MouseUnlock.Parent = EmotesWheel
+end
+
+local Front = EmotesWheel:FindFirstChild("Front")
+if not Front then
+    Front = Instance.new("Frame")
+    Front.Name = "Front"
+    Front.Parent = EmotesWheel
+end
+
+local SlotNumbers = Front:FindFirstChild("SlotNumbers")
+if not SlotNumbers then
+    SlotNumbers = Instance.new("Frame")
+    SlotNumbers.Name = "SlotNumbers"
+    SlotNumbers.Parent = Front
+end
+
+for i = 1, 8 do
+    local slot = SlotNumbers:FindFirstChild(tostring(i))
+    if not slot then
+        slot = Instance.new("TextLabel")
+        slot.Name = tostring(i)
+        slot.Parent = SlotNumbers
+        
+        local textConstraint = slot:FindFirstChild("TextSizeConstraint")
+        if not textConstraint then
+            textConstraint = Instance.new("UITextSizeConstraint")
+            textConstraint.Name = "TextSizeConstraint"
+            textConstraint.Parent = slot
+        end
+    end
+end
+
+local EmotesButtons = Front:FindFirstChild("EmotesButtons")
+if not EmotesButtons then
+    EmotesButtons = Instance.new("TextButton")
+    EmotesButtons.Name = "EmotesButtons"
+    EmotesButtons.Parent = Front
+end
+
+for i = 1, 4 do
+    local imageLabel = EmotesButtons:FindFirstChild(tostring(i))
+    if not imageLabel then
+        imageLabel = Instance.new("ImageLabel")
+        imageLabel.Name = tostring(i)
+        imageLabel.Parent = EmotesButtons
+        
+        local aspectRatio = imageLabel:FindFirstChild("AsspectRatioConstraint")
+        if not aspectRatio then
+            aspectRatio = Instance.new("UIAspectRatioConstraint")
+            aspectRatio.Name = "AsspectRatioConstraint"
+            aspectRatio.Parent = imageLabel
+        end
+    end
+end
+
+local Back = EmotesWheel:FindFirstChild("Back")
+if not Back then
+    Back = Instance.new("Frame")
+    Back.Name = "Back"
+    Back.Parent = EmotesWheel
+end
+
+local Background = Back:FindFirstChild("Background")
+if not Background then
+    Background = Instance.new("Folder")
+    Background.Name = "Background"
+    Background.Parent = Back
+end
+
+local BackgroundCircleOverlay = Background:FindFirstChild("BackgroundCircleOverlay")
+if not BackgroundCircleOverlay then
+    BackgroundCircleOverlay = Instance.new("Frame")
+    BackgroundCircleOverlay.Name = "BackgroundCircleOverlay"
+    BackgroundCircleOverlay.Parent = Background
+end
+
+local UICorner = BackgroundCircleOverlay:FindFirstChild("1")
+if not UICorner then
+    UICorner = Instance.new("UICorner")
+    UICorner.Name = "1"
+    UICorner.Parent = BackgroundCircleOverlay
+end
+
+local Selection = Background:FindFirstChild("Selection")
+if not Selection then
+    Selection = Instance.new("Frame")
+    Selection.Name = "Selection"
+    Selection.Parent = Background
+end
+
+local SelectionEffect = Selection:FindFirstChild("SelectionEffect")
+if not SelectionEffect then
+    SelectionEffect = Instance.new("Frame")
+    SelectionEffect.Name = "SelectionEffect"
+    SelectionEffect.Parent = Selection
+end
+
+local SelectedLine = SelectionEffect:FindFirstChild("SelectedLine")
+if not SelectedLine then
+    SelectedLine = Instance.new("ImageLabel")
+    SelectedLine.Name = "SelectedLine"
+    SelectedLine.Parent = SelectionEffect
+end
+
+local SelectedLineAspect = SelectedLine:FindFirstChild("AsspectRatioConstraint")
+if not SelectedLineAspect then
+    SelectedLineAspect = Instance.new("UIAspectRatioConstraint")
+    SelectedLineAspect.Name = "AsspectRatioConstraint"
+    SelectedLineAspect.Parent = SelectedLine
+end
+
+local HelloThere = SelectedLineAspect:FindFirstChild("HelloThere")
+if not HelloThere then
+    HelloThere = Instance.new("Folder")
+    HelloThere.Name = "HelloThere"
+    HelloThere.Parent = SelectedLineAspect
+end
+
+local BackgroundGradient = Background:FindFirstChild("BackgroundGradient")
+if not BackgroundGradient then
+    BackgroundGradient = Instance.new("Frame")
+    BackgroundGradient.Name = "BackgroundGradient"
+    BackgroundGradient.Parent = Background
+end
+
+local SelectionGradient = BackgroundGradient:FindFirstChild("SelectionGradient")
+if not SelectionGradient then
+    SelectionGradient = Instance.new("Frame")
+    SelectionGradient.Name = "SelectionGradient"
+    SelectionGradient.Parent = BackgroundGradient
+end
+
+local SelectedGradient = SelectionGradient:FindFirstChild("SelectedGradient")
+if not SelectedGradient then
+    SelectedGradient = Instance.new("ImageLabel")
+    SelectedGradient.Name = "SelectedGradient"
+    SelectedGradient.Parent = SelectionGradient
+end
+
+local GradientSizeConstraint = SelectedGradient:FindFirstChild("SizeConstraint")
+if not GradientSizeConstraint then
+    GradientSizeConstraint = Instance.new("UISizeConstraint")
+    GradientSizeConstraint.Name = "SizeConstraint"
+    GradientSizeConstraint.Parent = SelectedGradient
+end
+
+local GradientAspectRatio = SelectedGradient:FindFirstChild("AsspectRatioConstraint")
+if not GradientAspectRatio then
+    GradientAspectRatio = Instance.new("UIAspectRatioConstraint")
+    GradientAspectRatio.Name = "AsspectRatioConstraint"
+    GradientAspectRatio.Parent = SelectedGradient
+end
+
+local BackgroundImage = Background:FindFirstChild("BackgroundImage")
+if not BackgroundImage then
+    BackgroundImage = Instance.new("ImageLabel")
+    BackgroundImage.Name = "BackgroundImage"
+    BackgroundImage.Parent = Background
+end
+
+local BackgroundText = Background:FindFirstChild("BackgroundText")
+if not BackgroundText then
+    BackgroundText = Instance.new("Frame")
+    BackgroundText.Name = "BackgroundText"
+    BackgroundText.Parent = Background
+end
+
+local MiddleText = BackgroundText:FindFirstChild("MiddleText")
+if not MiddleText then
+    MiddleText = Instance.new("TextLabel")
+    MiddleText.Name = "MiddleText"
+    MiddleText.Parent = BackgroundText
+end
+
+local MiddleTextConstraint = MiddleText:FindFirstChild("TextSizeConstraint")
+if not MiddleTextConstraint then
+    MiddleTextConstraint = Instance.new("UITextSizeConstraint")
+    MiddleTextConstraint.Name = "TextSizeConstraint"
+    MiddleTextConstraint.Parent = MiddleText
+end
+
+local ErrorMessage = Children:FindFirstChild("ErrorMessage")
+if not ErrorMessage then
+    ErrorMessage = Instance.new("Frame")
+    ErrorMessage.Name = "ErrorMessage"
+    ErrorMessage.Parent = Children
+end
+
+local ErrorSizeConstraint = ErrorMessage:FindFirstChild("SizeConstraint")
+if not ErrorSizeConstraint then
+    ErrorSizeConstraint = Instance.new("UISizeConstraint")
+    ErrorSizeConstraint.Name = "SizeConstraint"
+    ErrorSizeConstraint.Parent = ErrorMessage
+end
+
+local ErrorAspectRatio = ErrorMessage:FindFirstChild("AsspectRatioConstraint")
+if not ErrorAspectRatio then
+    ErrorAspectRatio = Instance.new("UIAspectRatioConstraint")
+    ErrorAspectRatio.Name = "AsspectRatioConstraint"
+    ErrorAspectRatio.Parent = ErrorMessage
+end
+
+local ErrorText = ErrorMessage:FindFirstChild("ErrorText")
+if not ErrorText then
+    ErrorText = Instance.new("TextLabel")
+    ErrorText.Name = "ErrorText"
+    ErrorText.Parent = ErrorMessage
+end
+
+local ErrorTextSizeConstraint = ErrorText:FindFirstChild("SizeConstraint")
+if not ErrorTextSizeConstraint then
+    ErrorTextSizeConstraint = Instance.new("UISizeConstraint")
+    ErrorTextSizeConstraint.Name = "SizeConstraint"
+    ErrorTextSizeConstraint.Parent = ErrorText
+end
+
+local ErrorTextConstraint = ErrorText:FindFirstChild("TextSizeConstraint")
+if not ErrorTextConstraint then
+    ErrorTextConstraint = Instance.new("UITextSizeConstraint")
+    ErrorTextConstraint.Name = "TextSizeConstraint"
+    ErrorTextConstraint.Parent = ErrorText
+end
+
+local ErrorIcon = ErrorMessage:FindFirstChild("ErrorIcon")
+if not ErrorIcon then
+    ErrorIcon = Instance.new("ImageLabel")
+    ErrorIcon.Name = "ErrorIcon"
+    ErrorIcon.Parent = ErrorMessage
+end
+
+local ErrorIconAspectRatio = ErrorIcon:FindFirstChild("AsspectRatioConstraint")
+if not ErrorIconAspectRatio then
+    ErrorIconAspectRatio = Instance.new("UIAspectRatioConstraint")
+    ErrorIconAspectRatio.Name = "AsspectRatioConstraint"
+    ErrorIconAspectRatio.Parent = ErrorIcon
+end
 -- vars
 getgenv().IS_SALAD_LOADED = false
 getgenv().shared = shared 
