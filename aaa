@@ -567,8 +567,7 @@ getgenv().setidentity = newcclosure(function(level, ...)
     if level == 8 then
         local callstack = debug.traceback()
         if callstack:match("__namecall") or callstack:match("SaveScriptProfilingData") or callstack:match("GetObjects") then
-            error("[ Salad ] -> Blocked function")
-            return false
+            return error("[ Salad ] -> Blocked function")
         end
     end
     local success, result = pcall(function()
@@ -579,8 +578,7 @@ getgenv().setidentity = newcclosure(function(level, ...)
         return true
     end)
     if not success or result == false then
-        error("[ Salad ] -> Blocked function")
-        return false
+        return error("[ Salad ] -> Blocked function")
     end
     return pcall(ogidentityset, level, ...)
 end)
@@ -593,8 +591,7 @@ if mt then
         local method = getnamecallmethod()
         for _, dangerous_method in ipairs(dangerous_functions) do
             if method == dangerous_method then
-                error("[ Salad ] -> Blocked function")
-                return nil
+                return error("[ Salad ] -> Blocked function")
             end
         end
         return old_namecall(self, ...)
