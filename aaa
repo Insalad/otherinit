@@ -529,6 +529,7 @@ getgenv().is_our_closure = isexecutorclosure
 getgenv().issynapsefunction = isexecutorclosure
 getgenv().setrbxclipboard = setclipboard
 task.wait(1)
+--[[
 local dangerous_functions = {
     "OpenVideosFolder", "OpenScreenshotsFolder", "GetRobuxBalance", "PerformPurchase",
     "PromptBundlePurchase", "PromptNativePurchase", "PromptProductPurchase", "PromptPurchase",
@@ -598,5 +599,7 @@ if mt then
     end)
     setreadonly(mt, true)
 end
+]]
+warn("WARNING: Salad's vulnerability blocker is currently being maintained, please be careful")
 print("[ Salad ] -> Loaded Init")
 getgenv().IS_SALAD_LOADED = true
