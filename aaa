@@ -14,6 +14,7 @@ getgenv().IS_SALAD_LOADED = false
 getgenv().shared = shared 
 local camera = workspace.CurrentCamera
 local RunService = game:GetService("CoreGui")
+local dprint = _DEBUG and function(...) print("[ Salad ] -> "..(...)) end or function(...) end
 -- tables 
 getgenv().syn = {}
 getgenv().salad = {}
@@ -23,6 +24,8 @@ local keyshit = {}
 local protecteduis = {}
 local names = {}
 -- functions
+dprint("⏸️ Creating and setting up 116 functions and aliases...") -- might be 115 or 117 idk
+
 getgenv().makewriteable = newcclosure(function(taable)
     return setreadonly(taable, false)
 end)
@@ -582,6 +585,7 @@ getgenv().setidentity = newcclosure(function(level, ...)
     end
     return pcall(ogidentityset, level, ...)
 end)
+dprint("✅ Done!")
 
 local mt = getrawmetatable(game)
 if mt then
@@ -598,5 +602,5 @@ if mt then
     end)
     setreadonly(mt, true)
 end
-print("[ Salad ] -> Loaded Init")
+dprint("Loaded Init")
 getgenv().IS_SALAD_LOADED = true
