@@ -9,12 +9,18 @@
 ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░                                                                   
 ]]
 if not game:IsLoaded() then game.Loaded:Wait() end
+if not getgenv and not setreadonly and not clonefunction and not httpget and not getrawmetatable and not getnamecallmethod then repeat task.wait() until getgenv and setreadonly and clonefunction and httpget and getrawmetatable and getnamecallmethod end
 -- vars
+function saladprint(msg)
+    --print("[ Salad ] -> "..msg)
+end 
+saladprint("defining vars")
 getgenv().IS_SALAD_LOADED = false
 getgenv().shared = shared 
 local camera = workspace.CurrentCamera
 local RunService = game:GetService("CoreGui")
 -- tables 
+saladprint("defining tables")
 getgenv().syn = {}
 getgenv().salad = {}
 getgenv().syn_backup = {}
@@ -23,21 +29,26 @@ local keyshit = {}
 local protecteduis = {}
 local names = {}
 -- functions
+saladprint("defining functions")
 getgenv().makewriteable = newcclosure(function(taable)
     return setreadonly(taable, false)
 end)
+saladprint("makewriteable done")
 getgenv().iswriteable = newcclosure(function(tbl)
     return not table.isfrozen(tbl)
 end)
+saladprint("iswriteable done")
 getgenv().httppost = newcclosure(function(URL, body, contenttype) 
     return game:HttpPostAsync(URL, body, contenttype)
 end)
+saladprint("httppost done")
 getgenv().syn.protect_gui = newcclosure(function(gui)
     names[gui] = {name = gui.Name, parent = gui.Parent}
     protecteduis[gui] = gui
     gui.Name = crypt.random(64)
     gui.Parent = gethui()
 end)
+saladprint("syn.protect_gui done")
 getgenv().syn.unprotect_gui = newcclosure(function(gui)
     if names[gui] then
         gui.Name = names[gui].name
@@ -45,16 +56,18 @@ getgenv().syn.unprotect_gui = newcclosure(function(gui)
     end
     protecteduis[gui] = nil
 end)
+saladprint("syn.unprotect_gui done")
 getgenv().syn.secure_call = newcclosure(function(func)
     local suc, rec = pcall(func) 
 	if not suc then 
 		warn("[ Syn Secure Call ]: "..tostring(rec))
 	end 
 end)
+saladprint("syn.secure_call (ahah real!!) done")
 getgenv().getprotecteduis = newcclosure(function()
     return protecteduis
 end)
-
+saladprint("getprotecteduis done")
 local testdebug = table.clone(debug)
 
 testdebug.getconstant = getgenv().getconstant
@@ -71,8 +84,10 @@ testdebug.setupvalue = getgenv().setupvalue
 testdebug.getregistry = getgenv().getregistry
 
 debug = testdebug
+saladprint("cloned debug library")
 
 getgenv().bit = {}
+saladprint("initializing bit lib")
 
 for i, v in next, bit32 do
 bit[i] = v
@@ -86,25 +101,27 @@ bit.lrotate = nil
 bit.badd = function(a, b)
    return a + b
 end
+saladprint("bit.badd done")
 
 bit.bsub = function(a, b)
    return a - b
 end
+saladprint("bit.bsub done")
 
 bit.bdiv = function(a, b)
    return a / b
 end
-
+saladprint("bit.bdiv done")
 bit.bmul = function(a, b)
    return a * b
 end
-
+saladprint("bit.bmul done")
 bit.tobit = function(x)
   x = x % (2^32)
   if x >= 0x80000000 then x = x - (2^32) end
   return x
 end
-
+saladprint("bit.tobit done")
 bit.tohex = function(x, n)
  n = n or 8
  local up
@@ -116,7 +133,7 @@ bit.tohex = function(x, n)
  x = bit.band(x, 16^n-1)
  return ('%0'..n..(up and 'X' or 'x')):format(x)
 end
-
+saladprint("bit.tohex done")
 bit.bswap = function(x)
  local a = bit.band(x, 0xff)
  x = bit.rshift(x, 8)
@@ -127,14 +144,16 @@ bit.bswap = function(x)
  local d = bit.band(x, 0xff)
  return bit.lshift(bit.lshift(bit.lshift(a, 8) + b, 8) + c, 8) + d
 end
+saladprint("bit.bswap done")
+saladprint("bit lib done")
 getgenv().setthreadidentity = newcclosure(function(identity: number): ()
     _setidentity(identity)
     task.wait()
 end)
-
+saladprint("setthreadidentity modif done")
 getgenv().setidentity = getgenv().setthreadidentity
 getgenv().setthreadcontext = getgenv().setthreadidentity
-
+saladprint("setidentity aliases done")
 getgenv().getinstances = newcclosure(function()
             local objs = {}
             for i,v in next, getreg() do
@@ -148,12 +167,12 @@ getgenv().getinstances = newcclosure(function()
             end
          return objs
  end)
-
+ saladprint("getinstances done")
 
 do
+    saladprint("comm channels initializing")
     local CoreGui = game:GetService('CoreGui')
     local HttpService = game:GetService('HttpService')
-
     local comm_channels = CoreGui:FindFirstChild('comm_channels') or Instance.new('Folder', CoreGui)
     if comm_channels.Name ~= 'comm_channels' then
         comm_channels.Name = 'comm_channels'
@@ -164,13 +183,14 @@ do
         event.Name = id
         return id, event
     end)
-
+    saladprint("create done")
     getgenv().get_comm_channel = newcclosure(function(id) 
         assert(type(id) == 'string', 'string expected as argument #1')
         return comm_channels:FindFirstChild(id)
     end)
+    saladprint("get done")
 end
-
+saladprint("getactors")
 getgenv().getactors = newcclosure(function()
     local actors = {};
     for i, v in game:GetDescendants() do
@@ -180,7 +200,7 @@ getgenv().getactors = newcclosure(function()
     end
     return actors;
 end);
-
+saladprint("getactors done")
 getgenv().getnilinstances = newcclosure(function()
     local objs = {}
 	for i,v in next,getreg() do
@@ -194,11 +214,11 @@ getgenv().getnilinstances = newcclosure(function()
 	end
 	return objs
 end)
-
+saladprint("getnilinstances done")
 getgenv().getscripthash = newcclosure(function(script)
     return script:GetHash()
 end)
-
+saladprint("getscripthash done")
 setreadonly(getgenv().debug,false)
 getgenv().debug.traceback = getrenv().debug.traceback
 getgenv().debug.profilebegin = getrenv().debug.profilebegin
@@ -206,7 +226,7 @@ getgenv().debug.profileend = getrenv().debug.profileend
 getgenv().debug.getmetatable = getgenv().getrawmetatable
 getgenv().debug.setmetatable = getgenv().setrawmetatable
 getgenv().debug.info = getrenv().debug.info
-
+saladprint("debug done")
 getgenv().getrunningscripts = newcclosure(function()
     local t = table.create(0)
 
@@ -225,7 +245,7 @@ getgenv().getrunningscripts = newcclosure(function()
 return t
 
 end)
-
+saladprint("getrunningscripts done")
 getgenv().getloadedmodules = newcclosure(function()
     local list = {}
     for i, v in getgc(false) do
@@ -240,7 +260,7 @@ getgenv().getloadedmodules = newcclosure(function()
     end
     return list
 end)
-
+saladprint("getloadedmodules done")
 getgenv().getsenv = newcclosure(function(script_instance)
    for i, v in pairs(getreg()) do
       if type(v) == "function" then
@@ -254,14 +274,14 @@ end)
 getgenv().isnetworkowner = newcclosure(function(part: BasePart): boolean
     return part.ReceiveAge == 0 and not part.Anchored and part.Velocity.Magnitude > 0
 end)
-
+saladprint("isnetworkowner done")
 getgenv().firesignal = newcclosure(function(signal, ...)
     local connections = getconnections(signal)
     for _, connection in connections do
         connection.Function(...)
     end
 end)
-
+saladprint("firesignal done")
 getgenv().setsimulationradius = newcclosure(function(newRadius)
     assert(newRadius, `arg #1 is missing`)
     assert(type(newRadius) == "number", `arg #1 must be type number`)
@@ -282,7 +302,7 @@ getgenv().getsimulationradius = newcclosure(function()
         return LocalPlayer.SimulationRadius
     end
 end)
-
+saladprint("get/set simulationradius done")
 
 getgenv().fireproximityprompt = newcclosure(function(proximityprompt, amount, skip)
     assert(
@@ -315,7 +335,7 @@ getgenv().fireproximityprompt = newcclosure(function(proximityprompt, amount, sk
     proximityprompt.MaxActivationDistance = oldMaxDistance
     proximityprompt.HoldDuration = oldHoldDuration
 end)
-
+saladprint("fireproximityprompt done")
 getgenv().http = {}
 getgenv().http.request = request
 setreadonly(http, true)
@@ -349,7 +369,7 @@ getgenv().crypt.hash = getgenv().hash
 setreadonly(getgenv().base64, true)
 setreadonly(getgenv().crypt, true)
 local _oldd = clonefunction(getscriptclosure_handler)
-
+saladprint("crypt/base64/http aliases done")
 getgenv().getscriptclosure = newcclosure(function(scr) 
 	local closure = _oldd(scr)
 
@@ -363,7 +383,7 @@ getgenv().getscriptclosure = newcclosure(function(scr)
 		return nil
 	end
 end)
-
+saladprint("getscriptclosure modified done")
 getgenv().getscriptfunction = getgenv().getscriptclosure
 local oldreq = clonefunction(getrenv().require)
 getgenv().require = newcclosure(function(v)
@@ -384,6 +404,7 @@ getgenv().require = newcclosure(function(v)
         return res
     end
 end)
+saladprint("require modified done")
 getgenv().fireclickdetector = newcclosure(function(Target)
 	assert(typeof(Target) == "Instance", "invalid argument #1 to 'fireclickdetector' (Instance expected, got " .. type(Target) .. ") ", 2)
 	local ClickDetector = Target:FindFirstChild("ClickDetector") or Target
@@ -418,11 +439,11 @@ getgenv().fireclickdetector = newcclosure(function(Target)
 		NewPart:Destroy()
 	end)
 end)
-
+saladprint("fireclickdetector done")
 
 getgenv()["fire_click_detector"] = fireclickdetector
 getgenv()["FireClickDetector"] = fireclickdetector
-
+saladprint("aliases for fireclickdetector done")
 if Drawing then 
     local Player = game:GetService('Players').LocalPlayer;
     local textService = cloneref(game:GetService("TextService"));
@@ -474,10 +495,12 @@ if Drawing then
         x[y] = z;
     end)
 else 
-    warn("[ Salad ] -> C Drawing failed to load... loading luau one")
+    warn("[ Salad ] -> C Drawing failed to load... loading luau one") -- shouldnt happen anymore
     loadstring(httpget('https://pastebin.com/raw/zBD4dhXw'))()
 end
+saladprint("drawing done")
 loadstring(httpget("https://raw.githubusercontent.com/Insalad/otherinit/refs/heads/main/decompiler"))()
+saladprint("decompiler done")
 getgenv().isreadable = isreadonly 
 getgenv().isexecclosure = isexecutorclosure
 getgenv().is_executor_closure = isexecclosure
@@ -528,6 +551,7 @@ getgenv().debug.isvalidlevel = getgenv().debug.validlevel
 getgenv().is_our_closure = isexecutorclosure 
 getgenv().issynapsefunction = isexecutorclosure
 getgenv().setrbxclipboard = setclipboard
+saladprint("aliases done")
 task.wait(1)
 local dangerous_functions = {
     "OpenVideosFolder", "OpenScreenshotsFolder", "GetRobuxBalance", "PerformPurchase",
@@ -561,42 +585,84 @@ local dangerous_functions = {
     "CallFunction", "BindCoreActive", "ReportAbuse", "ReportAbuseV3", "ReportChatAbuse",
     "GetUserSubscriptionStatusAsync", "Load"
 }
-
+local dangerous_functions_map = {}
+for _, func_name in ipairs(dangerous_functions) do
+    dangerous_functions_map[func_name] = true
+end
 local ogidentityset = setidentity
+if not ogidentityset then
+    warn("[ Salad ] -> Original setidentity function not found")
+    return
+end
+function grahhh(message)
+    warn(message)
+    return nil
+end
 getgenv().setidentity = newcclosure(function(level, ...)
     if level == 8 then
-        local callstack = debug.traceback()
-        if callstack:match("__namecall") or callstack:match("SaveScriptProfilingData") or callstack:match("GetObjects") then
-            return error("[ Salad ] -> Blocked function")
+        local success, callstack = pcall(debug.traceback)
+        if not success then
+            return grahhh("[ Salad ] -> Failed to get call stack")
+        end
+        if callstack and (
+            callstack:match("__namecall") or 
+            callstack:match("SaveScriptProfilingData") or 
+            callstack:match("GetObjects")
+        ) then
+            return grahhh("[ Salad ] -> Blocked potentially dangerous identity change")
         end
     end
-    local success, result = pcall(function()
+    local success, shouldBlock = pcall(function()
         local callstack = debug.traceback()
-        if callstack:match("BatchPayload") or callstack:match("OpenUrl") or callstack:match("LinkingService") then
-            return false
-        end
-        return true
+        return callstack and (
+            callstack:match("BatchPayload") or 
+            callstack:match("OpenUrl") or 
+            callstack:match("LinkingService")
+        )
     end)
-    if not success or result == false then
-        return error("[ Salad ] -> Blocked function")
+    if not success or shouldBlock == true then
+        return grahhh("[ Salad ] -> Blocked suspicious identity change")
     end
-    return pcall(ogidentityset, level, ...)
+    local result = {pcall(ogidentityset, level, ...)}
+    if not result[1] then
+        warn("[ Salad ] -> Error in setidentity:", result[2])
+        return nil
+    end
+    return select(2, unpack(result))
 end)
-
-local mt = getrawmetatable(game)
-if mt then
+pcall(function() saladprint("Protected setidentity applied") end)
+pcall(function()
+    local mt = getrawmetatable(game)
+    if not mt then
+        warn("[ Salad ] -> Game metatable not found")
+        return
+    end
     local old_namecall = mt.__namecall
-    setreadonly(mt, false)
+    if not old_namecall then
+        warn("[ Salad ] -> __namecall metamethod not found")
+        return
+    end
+    local success = pcall(function()
+        setreadonly(mt, false)
+    end)
+    if not success then
+        warn("[ Salad ] -> Failed to make metatable writable")
+        return
+    end
     mt.__namecall = newcclosure(function(self, ...)
-        local method = getnamecallmethod()
-        for _, dangerous_method in ipairs(dangerous_functions) do
-            if method == dangerous_method then
-                return error("[ Salad ] -> Blocked function")
-            end
+        local success, method = pcall(getnamecallmethod)
+        if success and method and dangerous_functions_map[method] then
+            return grahhh("[ Salad ] -> Blocked dangerous method: " .. method)
         end
         return old_namecall(self, ...)
     end)
-    setreadonly(mt, true)
-end
-print("[ Salad ] -> Loaded Init")
+    pcall(function()
+        setreadonly(mt, true)
+    end)
+    pcall(function() saladprint("Protected namecall applied") end)
+end)
+
+pcall(function() saladprint("Protection script loaded successfully") end)
+saladprint("protection done")
 getgenv().IS_SALAD_LOADED = true
+print("[ Salad ] -> Loaded Init")
